@@ -11,7 +11,3 @@ def delta():
     delta_length = (distance // 2) * part
     delta_angle = round(math.atan(delta_length / distance) * 180) // 2
     return delta_angle
-
-
-
-

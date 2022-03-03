@@ -1,5 +1,6 @@
 import cv2
 import math_cam
+import arduino
 import datetime
 
 class Face_detection:
@@ -10,6 +11,7 @@ class Face_detection:
     delta_y = 0
 
     def find_face(self):
+        count_res = datetime.datetime.now().second
         while True:
             success, img = self.cap.read()
             img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -21,10 +23,10 @@ class Face_detection:
                 self.delta_x = x + w // 2 - 320
                 self.delta_y = -(y + h // 2 - 240)
                 math_cam.delta_angle = self.delta_x
-                print(math_cam.delta())
+            if (datetime.datetime.now().second - self.now_time) % 2 == 0 and datetime.datetime.now().second != count_res:
+                count_res = datetime.datetime.now().second
+                arduino.get_angle(90 - math_cam.delta())
 
-                #if (datetime.datetime.now().second - self.now_time) % 2 == 0:
-                 #   arduino.get_angle(math_cam.delta())
             cv2.imshow('rez', img)
             if cv2.waitKey(1) & 0xff == ord('q'):
                 break
