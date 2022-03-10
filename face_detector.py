@@ -26,9 +26,9 @@ class Face_detection:
                 self.delta_x = x + w // 2 - 320
                 self.delta_y = -(y + h // 2 - 240)
                 math_cam.delta_angle = self.delta_x
-                if (datetime.datetime.now().second - self.now_time) % 2 == 0 and datetime.datetime.now().second != count_res:
+                if (datetime.datetime.now().second - self.now_time) % 1.5 == 0 and datetime.datetime.now().second != count_res:
                     count_res = datetime.datetime.now().second
-                    arduino.get_angle(90 - math_cam.delta())
+                    arduino.get_angle(math_cam.delta() // 2)
                     arduino.get_santimetr()
 
             cv2.imshow('rez', img)
