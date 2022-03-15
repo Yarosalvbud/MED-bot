@@ -3,7 +3,7 @@ import time
 import math_cam
 import serial
 
-arduino = serial.Serial(port="COM6", baudrate=9600, timeout=.1)
+arduino = serial.Serial(port="COM6", baudrate=115200, timeout=.1)
 
 
 def get_angle(delta_angle):
