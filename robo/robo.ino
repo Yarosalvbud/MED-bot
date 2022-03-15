@@ -26,9 +26,9 @@ void loop() {
     auto value = Serial.parseInt();
     if (value != 0) {
       
-      servo1.write(ACTUAL_POSITION - value);
-        if (ACTUAL_POSITION - value > 48){
-      ACTUAL_POSITION = ACTUAL_POSITION - value;
+        if ((ACTUAL_POSITION - value) > 48){
+                servo1.write(ACTUAL_POSITION - value);
+                ACTUAL_POSITION = ACTUAL_POSITION - value;
         }
     }
 
