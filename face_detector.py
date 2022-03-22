@@ -47,6 +47,7 @@ class Face_detection:
             else:
                 f_f = cv2.flip(img_gray, 1)
                 face_ff = self.face_cascade_ff.detectMultiScale(f_f, 1.1, 19)
+                face_ff = cv2.flip(face_ff, 1)
                 for (x, y, w, h) in face_ff:
                     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
                     self.delta_x = x + w // 2 - 320
