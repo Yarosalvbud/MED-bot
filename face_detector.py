@@ -1,9 +1,6 @@
 import cv2
 import math_cam
 import arduino
-import cv2
-import math_cam
-import arduino
 import datetime
 
 
