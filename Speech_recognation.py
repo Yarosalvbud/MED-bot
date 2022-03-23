@@ -1,4 +1,6 @@
 import speech_recognition as sr
+import re
+from fuzzywuzzy import fuzz
 
 r = sr.Recognizer()
 with sr.AudioFile("C:\ST\oice.wav") as source:  # Microphone
@@ -44,3 +46,20 @@ symptomps = ['зуд', 'кожная сыпь', 'узловые кожные в�
              'учащенное сердцебиение', 'болезненная ходьба', 'гнойные прыщи',
              'угри', 'судороги', 'шелушение кожи', 'серебристый налет', 'небольшие вмятины на ногтях',
              'воспаленные ногти', 'волдыри', 'красные раны вокруг носа', 'желтая корка']
+
+
+def to_normal_text(text):
+    return re.findall(r'[^\w\s]+|\w+', text)
+
+
+def find_same_words(text, symptomps):
+    patient_symptoms = []
+    for symptom in symptomps:
+        for word in text:
+            if fuzz.ratio(symptom, word) > 50:
+                return patient_symptoms.append(symptom)
+    return patient_symptoms
+
+
+text = to_normal_text(text)
+print(find_same_words(text, symptomps))
