@@ -3,7 +3,7 @@ import re
 from fuzzywuzzy import fuzz
 
 r = sr.Recognizer()
-with sr.AudioFile("C:\ST\oice.wav") as source:  # Microphone
+with sr.AudioFile("C:\ST\ecord.wav") as source:  # Microphone
     audio = r.listen(source)
     try:
         text = r.recognize_google(audio, language="ru-RU")
@@ -56,10 +56,11 @@ def find_same_words(text, symptomps):
     patient_symptoms = []
     for symptom in symptomps:
         for word in text:
-            if fuzz.ratio(symptom, word) > 50:
-                return patient_symptoms.append(symptom)
+            if fuzz.ratio(symptom, word) > 70:
+                patient_symptoms.append(symptom)
     return patient_symptoms
 
 
 text = to_normal_text(text)
+print(text)
 print(find_same_words(text, symptomps))
